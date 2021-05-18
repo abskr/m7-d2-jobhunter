@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import HomePage from './pages/HomePage.jsx'
 import ResultsPage from './pages/ResultsPage.jsx'
+import JobDetailPage from './pages/JobDetailPage.jsx'
+import Navigator from './components/Navigator.jsx'
 import { BrowserRouter as Router, Route, Redirect,Link } from 'react-router-dom'
 
 class App extends Component {
@@ -10,6 +12,7 @@ class App extends Component {
     locationInput: '',
     positionInput: '',
     searchResults: [],
+    selectedJob: {},
     isLoading: false,
   };
 
@@ -48,6 +51,7 @@ class App extends Component {
   render() {
     return (
       <Router>
+        <Navigator />
         <Route
           path='/'
           exact
@@ -64,7 +68,22 @@ class App extends Component {
         <Route
           path='/results'
           exact
-          render={(routerProps) => <ResultsPage {...routerProps} searchResults={this.state.searchResults}/>}
+          render={(routerProps) => (
+            <ResultsPage
+              {...routerProps}
+              searchResults={this.state.searchResults}
+            />
+          )}
+        />
+        <Route
+          path='/results/:id'
+          exact
+          render={(routerProps) => (
+            <JobDetailPage
+              {...routerProps}
+              selectedJob={this.state.selectedJob}
+            />
+          )}
         />
       </Router>
     );

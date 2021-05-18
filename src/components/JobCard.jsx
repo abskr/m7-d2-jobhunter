@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap'
+// import {withRouter} from'react-router-dom'
 
-function JobCard({jobDesc}) {
+function JobCard({history, jobDesc}) {
   return (
     <Card>
       <Card.Body>
@@ -9,7 +10,7 @@ function JobCard({jobDesc}) {
         <div
           dangerouslySetInnerHTML={{ __html: jobDesc.description }}
         />
-        <Button variant='primary'>Go somewhere</Button>
+        <Button variant='primary'>Apply now!</Button>
       </Card.Body>
     </Card>
   );

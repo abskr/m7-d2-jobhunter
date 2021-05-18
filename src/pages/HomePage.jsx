@@ -43,8 +43,7 @@ function HomePage(props) {
 }
 
 const MainContainer = styled(Container)`
-  padding: 0;
-  margin: 0;
+  justify-self: center;
   display: flex;
   align-items: center;
   justify-content: center;

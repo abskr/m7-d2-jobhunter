@@ -7,21 +7,16 @@ function ResultsPage(props) {
   return (
     <Container>
       <Row>
-        <Col xs={12} md={{ span: 6, offset: 3 }}>
+        <Col xs={12} md={{ span: 8, offset: 2 }}>
           {props.searchResults && 
             props.searchResults.map(result => (
-              <JobCard jobDesc={result}/>
+              <JobCard key={result.id} jobDesc={result}/>
             ))
           }
-          <JobMap></JobMap>
         </Col>
       </Row>
     </Container>
   );
 }
-
-const JobMap = styled.div`
-  border: solid 5px
-`
 
 export default ResultsPage;
