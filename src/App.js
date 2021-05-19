@@ -12,41 +12,64 @@ class App extends Component {
     locationInput: '',
     positionInput: '',
     searchResults: [],
-    selectedJob: {},
+    selectedJob: null,
     isLoading: false,
   };
 
   handleInput = (e) => {
-    let name = e.target.name; 
+    let { name, value } = e.target;
     console.log('ID OF THIS INPUT FIELD IS', name);
 
     this.setState({
-        ...this.state,
-        [name] : e.target.value, 
+      ...this.state,
+      [name]: value,
     });
   };
 
+  // https://striveschool-api.herokuapp.com/api/jobs
+  // https://jobs.github.com/positions.json
   submitQuery = async (e) => {
-    e.preventDefault()
-    let baseUrl = 'https://jobs.github.com/positions.json'
-    let locationQuery = `location=${this.state.locationInput}`
+    e.preventDefault();
+    let baseUrl = 'https://jobs.github.com/positions.json';
+    let locationQuery = `location=${this.state.locationInput}`;
     let position = `description=${this.state.positionInput}`;
     try {
       let resp = await fetch(`${baseUrl}?${position}&${locationQuery}`);
-      if (resp.ok){
-        let data = await resp.json()
-        console.log(data)
+      if (resp.ok) {
+        let data = await resp.json();
+        console.log(data);
         this.setState({
-          ...this.state, searchResults : data
-        })
+          ...this.state,
+          searchResults: data,
+        });
       } else {
-        console.error("something's wrong!!")
+        console.error("something's wrong!!");
       }
-      <Redirect to='/results'/>
+      // <Redirect to='/results' />;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
+
+  submitJobId = async (jobId) => {
+    try {
+      let baseUrl = 'https://jobs.github.com/positions';
+      let resp = await fetch(`${baseUrl}/${jobId}.json`);
+      if (resp.ok) {
+        let data = await resp.json();
+        console.log(jobId);
+        this.setState({
+          ...this.state,
+          selectedJob: data,
+        });
+      } else {
+        console.error("something's wrong!!");
+      }
+      // <Redirect to='/results' />;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   render() {
     return (
@@ -72,6 +95,7 @@ class App extends Component {
             <ResultsPage
               {...routerProps}
               searchResults={this.state.searchResults}
+              submitJobId={this.submitJobId}
             />
           )}
         />

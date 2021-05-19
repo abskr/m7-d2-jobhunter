@@ -5,16 +5,19 @@ import styled from 'styled-components'
 
 const Navigator = () => {
   return (
-    <Navbar className='px-3' bg='dark' variant='dark'>
+    <NavBar sticky='top' className='px-3' bg='dark' variant='dark'>
       <HomeLink to='/'>
         <Navbar.Brand>Home</Navbar.Brand>
       </HomeLink>
-    </Navbar>
+    </NavBar>
   );
 };
 
 const HomeLink = styled(Link)`
   text-decoration: none
+`
+const NavBar = styled(Navbar)`
+  min-height: 7vh
 `
 
 

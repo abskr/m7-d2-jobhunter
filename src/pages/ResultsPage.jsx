@@ -6,17 +6,21 @@ import JobCard from '../components/JobCard.jsx'
 function ResultsPage(props) {
   return (
     <Container>
-      <Row>
+      <RowContainer>
         <Col xs={12} md={{ span: 8, offset: 2 }}>
           {props.searchResults && 
             props.searchResults.map(result => (
-              <JobCard key={result.id} jobDesc={result}/>
+              <JobCard submitJobId={props.submitJobId} key={result.id} jobDesc={result}/>
             ))
           }
         </Col>
-      </Row>
+      </RowContainer>
     </Container>
   );
 }
+
+const RowContainer = styled(Row)`
+  margin-top: 3vh
+`
 
 export default ResultsPage;

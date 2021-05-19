@@ -47,7 +47,7 @@ const MainContainer = styled(Container)`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 93vh;
   width: 100vw;
 `
 
